@@ -1,9 +1,9 @@
-export const Feedback = ({ value }) => {
+export const Feedback = ({ value: { good, neutral, bad } }) => {
   return (
     <div>
-      <p>Good: {value.good}</p>
-      <p>Neutral: {value.neutral}</p>
-      <p>Bad: {value.bad}</p>
+      <p>Good: {good}</p>
+      <p>Neutral: {neutral}</p>
+      <p>Bad: {bad}</p>
     </div>
   );
 };
