@@ -20,6 +20,10 @@ export const App = () => {
 
   const totalFeedback = count.good + count.neutral + count.bad;
 
+  const positivFeedback = Math.round(
+    ((count.good + count.neutral) / totalFeedback) * 100,
+  );
+
   const isHidden = totalFeedback > 0;
 
   return (
@@ -36,7 +40,11 @@ export const App = () => {
           isHidden={isHidden}
         />
         {totalFeedback > 0 ? (
-          <Feedback value={count} />
+          <Feedback
+            value={count}
+            total={totalFeedback}
+            positive={positivFeedback}
+          />
         ) : (
           <Notification text={'No feedback yet'} />
         )}
