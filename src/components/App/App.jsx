@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Feedback } from '../Feedback/Feedback';
 import { Options } from '../Options/Options';
 import { Notification } from '../Notification/Notification';
@@ -10,6 +10,18 @@ export const App = () => {
     neutral: 0,
     bad: 0,
   });
+
+  // const [count, setCount] = useState(() => {
+  //   const savedCount = window.localStorage.getItem('saved-count');
+  //   if (savedCount !== null) {
+  //     return savedCount;
+  //   }
+  //   return {
+  //     good: 0,
+  //     neutral: 0,
+  //     bad: 0,
+  //   };
+  // });
 
   const handleClick = option => {
     setCount({
@@ -25,6 +37,10 @@ export const App = () => {
   );
 
   const isHidden = totalFeedback > 0;
+
+  useEffect(() => {
+    window.localStorage.setItem('saved-count', JSON.stringify({ count }));
+  }, [count]);
 
   return (
     <>
