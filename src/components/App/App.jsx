@@ -39,8 +39,15 @@ export const App = () => {
   const isHidden = totalFeedback > 0;
 
   useEffect(() => {
-    window.localStorage.setItem('saved-count', JSON.stringify({ count }));
+    window.localStorage.setItem('saved-count', JSON.stringify(count));
   }, [count]);
+
+  const reset = () =>
+    setCount({
+      good: 0,
+      neutral: 0,
+      bad: 0,
+    });
 
   return (
     <>
@@ -50,11 +57,7 @@ export const App = () => {
           Please leave your feedback about our service by selecting one of the
           options below.
         </p>
-        <Options
-          onUpdate={handleClick}
-          setCount={setCount}
-          isHidden={isHidden}
-        />
+        <Options onUpdate={handleClick} reset={reset} isHidden={isHidden} />
         {totalFeedback > 0 ? (
           <Feedback
             value={count}
