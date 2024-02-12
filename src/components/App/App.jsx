@@ -5,23 +5,23 @@ import { Notification } from '../Notification/Notification';
 import './App.module.css';
 
 export const App = () => {
-  const [count, setCount] = useState({
-    good: 0,
-    neutral: 0,
-    bad: 0,
-  });
-
-  // const [count, setCount] = useState(() => {
-  //   const savedCount = window.localStorage.getItem('saved-count');
-  //   if (savedCount !== null) {
-  //     return savedCount;
-  //   }
-  //   return {
-  //     good: 0,
-  //     neutral: 0,
-  //     bad: 0,
-  //   };
+  // const [count, setCount] = useState({
+  //   good: 0,
+  //   neutral: 0,
+  //   bad: 0,
   // });
+
+  const [count, setCount] = useState(() => {
+    const savedCount = window.localStorage.getItem('saved-count');
+    if (savedCount !== null) {
+      return JSON.parse(savedCount);
+    }
+    return {
+      good: 0,
+      neutral: 0,
+      bad: 0,
+    };
+  });
 
   const handleClick = option => {
     setCount({
