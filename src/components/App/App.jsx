@@ -3,14 +3,9 @@ import { Feedback } from '../Feedback/Feedback';
 import { Options } from '../Options/Options';
 import { Notification } from '../Notification/Notification';
 import './App.module.css';
+import { Description } from '../Description/Description';
 
 export const App = () => {
-  // const [count, setCount] = useState({
-  //   good: 0,
-  //   neutral: 0,
-  //   bad: 0,
-  // });
-
   const [count, setCount] = useState(() => {
     const savedCount = window.localStorage.getItem('saved-count');
     if (savedCount !== null) {
@@ -36,7 +31,7 @@ export const App = () => {
     ((count.good + count.neutral) / totalFeedback) * 100,
   );
 
-  const isHidden = totalFeedback > 0;
+  const activeBtn = totalFeedback > 0;
 
   useEffect(() => {
     window.localStorage.setItem('saved-count', JSON.stringify(count));
@@ -52,12 +47,13 @@ export const App = () => {
   return (
     <>
       <div>
-        <h1>Sip Happens Café</h1>
-        <p>
-          Please leave your feedback about our service by selecting one of the
-          options below.
-        </p>
-        <Options onUpdate={handleClick} reset={reset} isHidden={isHidden} />
+        <Description
+          topic={'Sip Happens Café'}
+          text={
+            'Please leave your feedback about our service by selecting one of the options below.'
+          }
+        />
+        <Options onUpdate={handleClick} reset={reset} active={activeBtn} />
         {totalFeedback > 0 ? (
           <Feedback
             value={count}
@@ -67,8 +63,6 @@ export const App = () => {
         ) : (
           <Notification text={'No feedback yet'} />
         )}
-
-        {/* <Feedback value={count} /> */}
       </div>
     </>
   );
